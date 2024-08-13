@@ -1,22 +1,22 @@
 /*
-TITULO: Biblioteca com funÁıes para calcular o tempo
+TITULO: Biblioteca com fun√ß√µes para calcular o tempo
 DATA: 12/Agosto/2024
 Autor: Elgio Schlemer
 
-12/8/2024 - Abandono do gettimeofday para usar a funÁ„o clock que
-È padr„o C ANSI. 
+12/8/2024 - Abandono do gettimeofday para usar a fun√ß√£o clock que
+√© padr√£o C ANSI. 
 */
 
 #ifndef __TEMPO__
-/* Sempre que se cria uma biblioteca È prudente usar um define para ela.
- * Veja, as definiÁıes abaixo sÛ ocorrer„o se N√O HOUVER AINDA a constante
- * __TEMPO__. Isto evita erros com duplas inclusıes, ou seja, dois ou mais
- * #include "tempo.h". Apenas o primeiro ter· efeito e os demais nada
- * definir„o. Todos os .h deveriam usar isto.
+/* Sempre que se cria uma biblioteca √© prudente usar um define para ela.
+ * Veja, as defini√ß√µes abaixo s√≥ ocorrer√£o se N√ÉO HOUVER AINDA a constante
+ * __TEMPO__. Isto evita erros com duplas inclus√µes, ou seja, dois ou mais
+ * #include "tempo.h". Apenas o primeiro ter√° efeito e os demais nada
+ * definir√£o. Todos os .h deveriam usar isto.
  * */
 #define __TEMPO__
 
-/* 12/8 Maravilha. Agora de um jeito sÛ para Linux e Windows. 
+/* 12/8 Maravilha. Agora de um jeito s√≥ para Linux e Windows. 
  * Testado com sucesso em:
  * - Windows XP 32 bits com Dev++
  * - Windows XP 32 bits com Codeblocks
@@ -24,25 +24,27 @@ Autor: Elgio Schlemer
  * */
  
 #include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-/* para muitos cÛdigos, um inteiro longo sem sinal È o ideal.
-Se for um compilador de 32 bits, isto resultar· em um inteiro
-de 32 bits. PorÈm se for um compilador de 64 bits, ser· um inteiro
+/* para muitos c√≥digos, um inteiro longo sem sinal √© o ideal.
+Se for um compilador de 32 bits, isto resultar√° em um inteiro
+de 32 bits. Por√©m se for um compilador de 64 bits, ser√° um inteiro
 de 64 bits.
 
-Crio um typedef pois È muita coisa ficar digitando unsigned long int
-Assim, sÛ se coloca ulong
+Crio um typedef pois √© muita coisa ficar digitando unsigned long int
+Assim, s√≥ se coloca ulong
 */
 typedef unsigned long int ulong;
 
-/* uma funÁ„o para medir o tempo.
+/* uma fun√ß√£o para medir o tempo.
  * Ela retorna a quantidade de microsegundos que se passaram
- * desde a ˙ltima vez que a mesma funÁ„o foi chamada.
+ * desde a √∫ltima vez que a mesma fun√ß√£o foi chamada.
  *  
  * Em 24 de agosto de 2018 ela passou a ser a mesma para Linux e para Windows, 
- * pois o problema È que no
- * Windows n„o tinha a funÁ„o gettimeofday, mas agora tem uma implementaÁ„o
- * para Windows no inÌcio deste cÛdigo
+ * pois o problema √© que no
+ * Windows n√£o tinha a fun√ß√£o gettimeofday, mas agora tem uma implementa√ß√£o
+ * para Windows no in√≠cio deste c√≥digo
 */
 ulong tempo()
 {
@@ -52,14 +54,14 @@ ulong tempo()
     ulong ms;
     
     if (vezes == 0) {
-        /* Primeira invocaÁ„o */
+        /* Primeira invoca√ß√£o */
         vezes = 1;
         ti = clock();
-        /* Clock È ANSI e retorna quantos ciclos de CPU se passaram 
-         * desde o inÌcio do programa. O padr„o POSIX, segundo manual
+        /* Clock √© ANSI e retorna quantos ciclos de CPU se passaram 
+         * desde o in√≠cio do programa. O padr√£o POSIX, segundo manual
          * do clock, estabelece que 1s tem 1.000.000 de clocks independente
-         * do sistema. Sendo isso verdade (que È setado pela constante CLOCKS_PER_SEC)
-         * ent„o o retorno de clock acaba j· sendo em microssegundos.
+         * do sistema. Sendo isso verdade (que √© setado pela constante CLOCKS_PER_SEC)
+         * ent√£o o retorno de clock acaba j√° sendo em microssegundos.
          */
         return (0);
     }
